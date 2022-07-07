@@ -18,6 +18,12 @@ namespace TelegramBotProject.models.Managers.redactor
                 if (!exists)
                     return $"Статьи с названием '{input_text}' не существует!";
             }
+            else if (step == 2)
+            {
+                bool exists = PostDbContext.PostExists(input_text);
+                if (exists)
+                    return $"Статья с названием '{input_text}' уже существует!";
+            }
             return null;
         }
     }
