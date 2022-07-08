@@ -68,6 +68,7 @@ namespace TelegramBotProject
         {
             // Некоторые действия
             Console.WriteLine(exception);
+            System.IO.File.AppendAllText("logs.txt", DateTime.Now.ToString() + exception.ToString() + '\n');
         }
         static void HandleDeletion<DbContextType,TableType>(EntityDelOptions<DbContextType,TableType> options) 
             where DbContextType:DbContext,new()  where TableType:class
@@ -141,27 +142,29 @@ namespace TelegramBotProject
         static async Task Main(string[] args)
         {
             
-            Console.WriteLine("Запущен бот " + (await bot.GetMeAsync()).FirstName);
+                Console.WriteLine("Запущен бот " + (await bot.GetMeAsync()).FirstName);
+
+                ManagerConnector.ConnectManagers();
+                HandleDeletionFromDbsAsync();
+                HandleUpdateStatisticsViews();
+                var cts = new CancellationTokenSource();
+                var cancellationToken = cts.Token;
+                var receiverOptions = new ReceiverOptions
+                {
+                    AllowedUpdates = new UpdateType[] { UpdateType.Message },
+
+                    // receive all update types
+                };
+
+                bot.StartReceiving(
+                    HandleUpdateAsync,
+                    HandleErrorAsync,
+                    receiverOptions,
+                    cancellationToken
+                );
+                Thread.Sleep(-1);
             
-            ManagerConnector.ConnectManagers();
-            HandleDeletionFromDbsAsync();
-            HandleUpdateStatisticsViews();
-            var cts = new CancellationTokenSource();
-            var cancellationToken = cts.Token;
-            var receiverOptions = new ReceiverOptions
-            {
-                AllowedUpdates = new UpdateType[]{UpdateType.Message},
-       
-                // receive all update types
-            };
             
-            bot.StartReceiving(
-                HandleUpdateAsync,
-                HandleErrorAsync,
-                receiverOptions,
-                cancellationToken
-            );
-            Thread.Sleep(-1);
             //Console.ReadLine();
         }
     }
