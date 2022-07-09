@@ -33,7 +33,7 @@ namespace TelegramBotProject.models.Entities
             Name = post.Name;
             Description = post.Description;
             Url = post.Url;
-            Views = 0;
+            Views = post.Views;
             DeletionTime = deletionDate;
             Id = 1;
             
