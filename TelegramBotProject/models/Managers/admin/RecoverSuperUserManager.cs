@@ -94,7 +94,7 @@ namespace TelegramBotProject.models.Managers.admin
                 BannedSpecialUser banned = db.bannedSpecialUsers.Find(recoveryId);
                 string addingMessage = post_fields[1]+$"\nЕсли согласны, наберите команду /besuperuser и введите это <code>{post_fields[0]}</code>\n" +
                     $"PS Вы можете просто нажать на код, скопировав его";
-                SendMessage(botClient, banned.specialUser_Identity, $"Вам предлагают вернуться на роль {GetRoleName(banned.rightLevel)}а. Извините, что забанили вас по ошибке. Надеюсь, такого больше не повторится. Вот, что об этом пишет отправитель\n" + addingMessage);
+                SendMessage(botClient, banned.ChatId, $"Вам предлагают вернуться на роль {GetRoleName(banned.rightLevel)}а. Извините, что забанили вас по ошибке. Надеюсь, такого больше не повторится. Вот, что об этом пишет отправитель\n" + addingMessage);
             }
                 base.EndManage(botClient, update);
         }

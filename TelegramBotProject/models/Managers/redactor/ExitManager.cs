@@ -11,7 +11,7 @@ namespace TelegramBotProject.models.Managers.redactor
 {
     class ExitManager:Manager
     {
-        string control_command = "Да. Я полностью уверен в своём решении";
+        const string control_command = "Да. Я полностью уверен в своём решении";
         int exiterId = 0;
         string exitorRoleName = "";
         public ExitManager(string run) : base(run)
@@ -32,10 +32,11 @@ namespace TelegramBotProject.models.Managers.redactor
         protected void Exit(Chat chat)
         {
             using PostDbContext postDb = new();
+           
             foreach (var spec_user in postDb.special_users)
             {
-                Console.WriteLine(spec_user.specialUser_Identity);
-                if (spec_user.specialUser_Identity == chat.Id)
+                Console.WriteLine(spec_user.ChatId);
+                if (spec_user.ChatId == chat.Id)
                 {
                     exiterId = spec_user.Id;
                     exitorRoleName = MessageProccesor.GetRoleName(spec_user.rightLevel);

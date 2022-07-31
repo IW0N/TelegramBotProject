@@ -39,7 +39,7 @@ namespace TelegramBotProject.models.Managers.redactor
                     { 
                         long recieverId;
                         using (PostDbContext db=new())
-                            recieverId=db.special_users.Find(specUserId).specialUser_Identity;
+                            recieverId=db.special_users.Find(specUserId).ChatId;
                         var messArgs = new MessageArgs() { Reciever=recieverId, Media_mode=null};
                         corresponders.Add(current_worker,messArgs);
                     }

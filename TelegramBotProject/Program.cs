@@ -10,7 +10,6 @@ using TelegramBotProject.models.options;
 using static TelegramBotProject.models.MessageProccesor;
 using Telegram.Bot.Types.ReplyMarkups;
 using TelegramBotProject.models.modes;
-
 namespace TelegramBotProject
 {
     class Program
@@ -59,7 +58,6 @@ namespace TelegramBotProject
         }
         public static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
-            
             HandleMessage(botClient, update);
         
         }
@@ -68,7 +66,7 @@ namespace TelegramBotProject
         {
             // Некоторые действия
             Console.WriteLine(exception);
-            System.IO.File.AppendAllText("logs.txt", DateTime.Now.ToString() + exception.ToString() + '\n');
+           // System.IO.File.AppendAllText("logs.txt", DateTime.Now.ToString() + exception.ToString() + '\n');
         }
         static void HandleDeletion<DbContextType,TableType>(EntityDelOptions<DbContextType,TableType> options) 
             where DbContextType:DbContext,new()  where TableType:class
@@ -77,20 +75,25 @@ namespace TelegramBotProject
             {
                 using (DbContextType dbContext = new())
                 {
-                    TableType removableRecord = null;
+                    
                     var table = options.GetTable(dbContext);
+                    List<TableType> removableRecords = new();
                     foreach (var rem_info in table)
                     {
                         var deltaTime = DateTime.Now - options.GetDateCreating(rem_info);
                         if (deltaTime >= options.TimeConstraint)
-                            removableRecord = rem_info;
+                            removableRecords.Add(rem_info);
 
                     }
-                    if (removableRecord != null)
+                    if (removableRecords.Count>0)
                     {
-                        table.Remove(removableRecord);
+                        foreach (var removableRecord in removableRecords)
+                        {
+                            table.Remove(removableRecord);
+                            Console.WriteLine(options.BuildAnswer(removableRecord));
+                        }
                         dbContext.SaveChanges();
-                        Console.WriteLine(options.BuildAnswer(removableRecord));
+                        
                     }
                 }
             }
@@ -155,7 +158,7 @@ namespace TelegramBotProject
 
                     // receive all update types
                 };
-
+                
                 bot.StartReceiving(
                     HandleUpdateAsync,
                     HandleErrorAsync,

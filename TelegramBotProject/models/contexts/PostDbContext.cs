@@ -60,25 +60,18 @@ namespace TelegramBotProject.models.contexts
         public static PostDbContext GetContext() => new();
         public SpecialUser? GetUser(long user_id)
         {
+           
             foreach (var spec_user in special_users)
             {
-                if (spec_user.specialUser_Identity == user_id)
+                if (spec_user.ChatId == user_id)
                     return spec_user;
 
             }
             return null;
         }
         public SpecialUser? GetUser(int id) => special_users.Find(id);
-        public bool UserIsEditor(long user_id)
-        {
-            var user = GetUser(user_id);
-            return user != null && user.rightLevel <= 1;
-        }
-        public bool UserIsAdmin(long user_id)
-        {
-            var user = GetUser(user_id);
-            return user != null && user.rightLevel == 0;
-        }
+        
+       
         public static bool PostExists(string post_name)
         {
             bool exists;

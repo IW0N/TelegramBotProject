@@ -44,6 +44,7 @@ namespace TelegramBotProject.models
         {
             try
             {
+               
                 await botClient.SendTextMessageAsync(chat, message, ParseMode.Html,null,true);
             }
             catch { return; }
@@ -72,7 +73,7 @@ namespace TelegramBotProject.models
         static void SendMessageWithSendModeSelection(ITelegramBotClient bot, Entities.SpecialUser superUser,NotificationOptions opts,int myRole)
         {
           
-            long identity = superUser.specialUser_Identity;
+            var identity = superUser.ChatId;
             bool isOther = superUser.rightLevel >= opts.MinRightLevel && superUser.Id != opts.SenderId;
             bool isTarget = superUser.Id == opts.TargetId;
             string? message = isTarget ? opts.MessageToTarget : isOther ? opts.MessageToOther : null;
@@ -100,22 +101,7 @@ namespace TelegramBotProject.models
             var res = (int)obj["result"]["views"];
             return res;
         }
-        /*public static async Task FindPostsByWords(ITelegramBotClient botClient,Update update)
-        {
-            await Task.Run(() =>
-            {
-                string request = update.Message.Text;
-                SendMessage(botClient, update.Message.Chat, "Идёт поиск...");
-                List<Post> response_posts =new();
-                using (PostDbContext postDb=new())
-                {
-                    postDb.posts.Select<Post, Post>((index, p1) =>
-                    {
-
-                    });
-                }
-            });
-        }*/
+        
         
     }
 }

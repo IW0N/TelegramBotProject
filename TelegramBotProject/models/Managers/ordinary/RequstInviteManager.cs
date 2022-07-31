@@ -56,7 +56,7 @@ namespace TelegramBotProject.models.Managers.ordinary
             using (PostDbContext db=new())
             {
                 db.bannedSpecialUsers.Remove(banned);
-                specUser = new SpecialUser(banned.specialUser_Identity, banned.rightLevel);
+                specUser = new SpecialUser(banned.ChatId, banned.rightLevel);
                 db.special_users.Add(specUser);
                 db.SaveChanges();
             }
