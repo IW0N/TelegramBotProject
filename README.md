@@ -24,8 +24,8 @@ Commands:
 </ul>
 </p>
 <h3>Article redactor</h3>
-<p>This is the most important type. He can redact articles, rename it and remove if other redactor or person with rights up then himself will not recover post</br>
-Access commands:
+<p>This is the most important type. He can redact articles, rename it and remove if other redactor or person with rights up himself will not recover post</br>
+Accessed commands:
 <ul>
 <li>Commands of ordinay user</li>
 <li>/createPost - create article with name, url and description</li>
@@ -51,11 +51,11 @@ Commands:
 </ul>
 </p>
 <h3>Owner</h3>
-<p>Sometime administrators execute self work badly. In this case you can ban administrator. Also you can on/off recruitment of new super users</br>
+<p>Sometime administrators execute them self work badly. In this case you can ban administrator. Also you can on/off recruitment of new super users</br>
 Commands:
 <ul>
 <li>Commands of regular user, redactor and administrator</li>
 <li>/editRightLevel - allow to increase or decrease in rights</li>
-<li>/switchNSUA - switch new super user acceptance</li>
+<li>/switchNSUA - switch new super users acceptance</li>
 </ul>
 </p>
