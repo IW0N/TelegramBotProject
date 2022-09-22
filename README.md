@@ -51,7 +51,7 @@ Commands:
 </ul>
 </p>
 <h3>Owner</h3>
-<p>Sometime administrators execute self work badly. In this case you can ban administrator. Also you can on/off recruitment of new super users
+<p>Sometime administrators execute self work badly. In this case you can ban administrator. Also you can on/off recruitment of new super users</br>
 Commands:
 <ul>
 <li>Commands of regular user, redactor and administrator</li>
