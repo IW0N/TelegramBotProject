@@ -25,7 +25,7 @@ Commands:
 </p>
 <h3>Article redactor</h3>
 <p>This is the most important type. He can redact articles, rename it and remove if other redactor or person with rights up then himself will not recover post</br>
-Acess commands:
+Access commands:
 <ul>
 <li>Commands of ordinay user</li>
 <li>/createPost - create article with name, url and description</li>
