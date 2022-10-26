@@ -1,5 +1,5 @@
 {
-  "token": "5599644462:AAEoH_cR72qlGfjVOGdYwgo7Pak8VCvDcVw",
+  "token": "Your token :)))",
   "invites_db_connection_string": "Server=localhost;Database=invites;Trusted_Connection=True;",
   "posts_db_connection_string": "Server=localhost;Database=postes1_2;Trusted_Connection=True;",
   "deletion_old_posts_finally_delay": "23:59:59",
