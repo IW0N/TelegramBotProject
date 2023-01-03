@@ -5,6 +5,10 @@ VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelegramBotProject", "TelegramBotProject\TelegramBotProject.csproj", "{DBF35197-B3FE-4B2A-B664-2B6590A6693F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelegraphPublisher", "..\ConsoleApp2\TelegraphPublisher\TelegraphPublisher.csproj", "{78F19123-AEC0-4FC3-87D4-3CD361EEE6A3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordConverter2", "..\ConsoleApp2\WordConverter2\WordConverter2.csproj", "{88C45530-7981-452A-AED6-4095F82EB97F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{DBF35197-B3FE-4B2A-B664-2B6590A6693F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBF35197-B3FE-4B2A-B664-2B6590A6693F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBF35197-B3FE-4B2A-B664-2B6590A6693F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78F19123-AEC0-4FC3-87D4-3CD361EEE6A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78F19123-AEC0-4FC3-87D4-3CD361EEE6A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78F19123-AEC0-4FC3-87D4-3CD361EEE6A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78F19123-AEC0-4FC3-87D4-3CD361EEE6A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88C45530-7981-452A-AED6-4095F82EB97F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88C45530-7981-452A-AED6-4095F82EB97F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88C45530-7981-452A-AED6-4095F82EB97F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88C45530-7981-452A-AED6-4095F82EB97F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
