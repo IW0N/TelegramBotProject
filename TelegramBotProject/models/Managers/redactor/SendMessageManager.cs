@@ -74,7 +74,7 @@ namespace TelegramBotProject.models.Managers.redactor
         {
             if (mediaMode != null)
             {
-                string fileId = mediaMode == MediaMode.Photo ? message.Photo[0].FileId : message.Document.FileId;
+                string fileId = mediaMode == MediaMode.Photo ? message.Photo[^1].FileId : message.Document.FileId;
                 return new InputOnlineFile(fileId);
             }
             return null;

@@ -19,13 +19,14 @@ namespace TelegramBotProject.models.options
         {
             string json_text =  File.ReadAllText(bot_configs_path);
             dynamic json = JsonConvert.DeserializeObject(json_text);
-            Token = (string)json["token"];
-            InvitesDbConnectionString = (string)json["invites_db_connection_string"];
-            PostsDbConnectionString = (string)json["posts_db_connection_string"];
-            DeletionOldPostsFinallyDelay = TimeSpan.Parse((string)json["deletion_old_posts_finally_delay"]);
-            BanSuperUsersFinallyDelay = TimeSpan.Parse((string)json["ban_super_users_finally_delay"]);
-            RemoveInvitesDelay = TimeSpan.Parse((string)json["remove_invites_delay"]);
-            ViewCheckDelay = TimeSpan.Parse((string)json["view_check_delay"]);
+            dynamic bot = json["bot"];
+            Token = (string)bot["token"];
+            InvitesDbConnectionString = (string)bot["invites_db_connection_string"];
+            PostsDbConnectionString = (string)bot["posts_db_connection_string"];
+            DeletionOldPostsFinallyDelay = TimeSpan.Parse((string)bot["deletion_old_posts_finally_delay"]);
+            BanSuperUsersFinallyDelay = TimeSpan.Parse((string)bot["ban_super_users_finally_delay"]);
+            RemoveInvitesDelay = TimeSpan.Parse((string)bot["remove_invites_delay"]);
+            ViewCheckDelay = TimeSpan.Parse((string)bot["view_check_delay"]);
         }
     }
 }

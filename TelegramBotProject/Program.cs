@@ -10,20 +10,25 @@ using TelegramBotProject.models.options;
 using static TelegramBotProject.models.MessageProccesor;
 using Telegram.Bot.Types.ReplyMarkups;
 using TelegramBotProject.models.modes;
+using  TelegramBotProject.models.Managers.ordinary;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using TelegraphPublisher;
+
 namespace TelegramBotProject
 {
     class Program
     {
-
-
-
         public static readonly BotOptions botOptions; 
         public static readonly ITelegramBotClient bot;
-        
+        internal static Account account;
+        static readonly string config_path = "D:\\AdminInfo\\IT\\Программирование\\C#\\TelegramBotProject\\TelegramBotProject\\configs.json";
         static Program()
         {
-            botOptions = new("bot-configs.json");
+            botOptions = new(config_path);
             bot = new TelegramBotClient(botOptions.Token);
+            account = Account.GetFromConfig(config_path);
+            
         }
         static void HandleMessage(ITelegramBotClient botClient, Update update)
         {
@@ -59,6 +64,7 @@ namespace TelegramBotProject
         public static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
             HandleMessage(botClient, update);
+            
         
         }
        
@@ -120,6 +126,31 @@ namespace TelegramBotProject
                 }
             });
         }
+        static async Task HandleTokenRevoking()
+        {
+            await Task.Run(async () =>
+            {
+                var client = Publisher.client;
+                const string adress = "https://api.telegra.ph/revokeAccessToken?access_token=";
+                while (true)
+                {
+                    string old_json_str = System.IO.File.ReadAllText(config_path);
+                    JObject old_json = (JObject)JsonConvert.DeserializeObject(old_json_str);
+                    
+                    HttpRequestMessage request = new(HttpMethod.Get, adress + account.access_token);
+                    var response = client.Send(request);
+                    string jsonStr = await response.Content.ReadAsStringAsync();
+                    JObject json = (JObject)JsonConvert.DeserializeObject(jsonStr);
+                   
+                    Console.WriteLine(json.GetType());
+                    string newToken = (string)json["result"]["access_token"];
+                    account.access_token = newToken;
+                    old_json["account"]["access_token"] = newToken;
+                    System.IO.File.WriteAllText(config_path, old_json.ToString());
+                    Thread.Sleep(new TimeSpan(2, 0, 0));
+                }
+            });
+        }
         static async Task HandleDeletionFromDbsAsync()
         {
             
@@ -145,29 +176,30 @@ namespace TelegramBotProject
         static async Task Main(string[] args)
         {
             
-                Console.WriteLine("Запущен бот " + (await bot.GetMeAsync()).FirstName);
+            Console.WriteLine("Запущен бот " + (await bot.GetMeAsync()).FirstName);
 
-                ManagerConnector.ConnectManagers();
-                HandleDeletionFromDbsAsync();
-                HandleUpdateStatisticsViews();
-                var cts = new CancellationTokenSource();
-                var cancellationToken = cts.Token;
-                var receiverOptions = new ReceiverOptions
-                {
-                    AllowedUpdates = new UpdateType[] { UpdateType.Message },
+            ManagerConnector.ConnectManagers();
+            HandleDeletionFromDbsAsync();
+            HandleUpdateStatisticsViews();
+            //HandleTokenRevoking();
+            var cts = new CancellationTokenSource();
+            var cancellationToken = cts.Token;
+            var receiverOptions = new ReceiverOptions
+            {
+                AllowedUpdates = new UpdateType[] { UpdateType.Message },
 
-                    // receive all update types
-                };
-                
-                bot.StartReceiving(
-                    HandleUpdateAsync,
-                    HandleErrorAsync,
-                    receiverOptions,
-                    cancellationToken
-                );
-                Thread.Sleep(-1);
-            
-            
+                // receive all update types
+            };
+
+            bot.StartReceiving(
+                HandleUpdateAsync,
+                HandleErrorAsync,
+                receiverOptions,
+                cancellationToken
+            );
+            Thread.Sleep(-1);
+
+
             //Console.ReadLine();
         }
     }

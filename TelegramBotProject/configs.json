@@ -1,0 +1,18 @@
+{
+  "bot": {
+    "token": "токен бота",
+    "invites_db_connection_string": "Server=localhost;Database=invites;Trusted_Connection=True;",
+    "posts_db_connection_string": "Server=localhost;Database=postes1_2;Trusted_Connection=True;",
+    "deletion_old_posts_finally_delay": "23:59:59",
+    "ban_super_users_finally_delay": "23:59:59",
+    "remove_invites_delay": "15:00:00",
+    "view_check_delay": "00:00:30"
+  },
+  "account": {
+    "access_token": "токен",
+    "author_url": "ссылка на автора",
+    "author_name": "имя автора",
+    "short_author_name": "сокращеённое имя автора",
+    "revoking_token_delay": "2:00:00"
+  }
+}
